@@ -1,6 +1,6 @@
 import { POINTS_COLOR, POINTS_COLOR_VARIABLE, POINTS_PER_SQUARE, SHOW_RADIOUS } from "./constants";
 import "./style.css";
-import { TweenLite, Circ } from "gsap";
+import { gsap, Circ } from "gsap";
 
 let posy = 0;
 
@@ -153,15 +153,16 @@ function animate() {
 }
 
 function shiftPoint(p) {
-	TweenLite.to(p, 1 + 1 * Math.random(), {
-		x: p.originX - 50 + Math.random() * 100,
-		y: p.originY - 50 + Math.random() * 100,
-		ease: Circ.easeInOut,
-		onComplete: function () {
-			shiftPoint(p);
-		},
+	gsap.to(p, {
+	  duration: 1 + 1 * Math.random(),
+	  x: p.originX - 50 + Math.random() * 100,
+	  y: p.originY - 50 + Math.random() * 100,
+	  ease: Circ.easeInOut,
+	  onComplete: function () {
+		shiftPoint(p);
+	  },
 	});
-}
+  }
 
 // Canvas manipulation
 function drawLines(p) {
